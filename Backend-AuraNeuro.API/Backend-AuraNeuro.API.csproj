@@ -22,6 +22,34 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6"/>
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="9.0.6" />
+        <!-- Jwt related Packages -->
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.10"/>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Appointment\Application\" />
+      <Folder Include="Appointment\Domain\Model\" />
+      <Folder Include="Appointment\Infrastructure\" />
+      <Folder Include="Appointment\Interface\" />
+      <Folder Include="IAM\Application\Internal\QueryServices\" />
+      <Folder Include="IAM\Domain\Model\Queries\" />
+      <Folder Include="Neurologist\Application\Internal\CommandServices\" />
+      <Folder Include="Neurologist\Domain\Model\" />
+      <Folder Include="Neurologist\Infrastructure\" />
+      <Folder Include="Neurologist\Interface\" />
+      <Folder Include="Patient\Application\" />
+      <Folder Include="Patient\Domain\Model\" />
+      <Folder Include="Patient\Infrastructure\" />
+      <Folder Include="Patient\Interface\" />
+      <Folder Include="Prescription\Application\" />
+      <Folder Include="Prescription\Domain\Model\" />
+      <Folder Include="Prescription\Infrastructure\" />
+      <Folder Include="Prescription\Interface\" />
+      <Folder Include="SubscriptionManagement\Application\" />
+      <Folder Include="SubscriptionManagement\Domail\Model\" />
+      <Folder Include="SubscriptionManagement\Infrastructure\" />
+      <Folder Include="SubscriptionManagement\Interface\" />
     </ItemGroup>
 
 </Project>
