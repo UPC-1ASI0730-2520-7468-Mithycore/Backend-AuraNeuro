@@ -1,16 +1,15 @@
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Model.Aggregates;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Model.Command;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Repositories;
-using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services;
-using Backend_AuraNeuro.API.NeurologicalHealth.Interface.REST.Resources;
+using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services.Command;
 using Backend_AuraNeuro.API.Shared.Domain.Repositories;
 
 namespace Backend_AuraNeuro.API.NeurologicalHealth.Applications.Internal.CommandServices;
 
-public class NeuroAssessmentService(
+public class NeuroAssessmentCommandService(
     INeurologicalHealthRepository neurologicalHealthRepository,
     IUnitOfWork unitOfWork
-    ): INeuroAssessmentService
+    ): INeuroAssessmentCommandService
 {
     
     public async Task<NeuroAssessment?> Handle(CreateNeuroAssessmentCommand neuroAssessmentCommand)
@@ -21,13 +20,4 @@ public class NeuroAssessmentService(
         return newNeuroAssessment;
     }
 
-    public async Task<NeuroAssessment?> Handle(long id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<NeuroAssessment?>> Handle(string number)
-    {
-        throw new NotImplementedException();
-    }
 }

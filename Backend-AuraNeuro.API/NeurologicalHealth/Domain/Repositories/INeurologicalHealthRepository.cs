@@ -5,5 +5,6 @@ namespace Backend_AuraNeuro.API.NeurologicalHealth.Domain.Repositories;
 
 public interface INeurologicalHealthRepository: IBaseRepository<NeuroAssessment>
 {
-    Task<NeuroAssessment?> FindByNumberAsync(string number);
+    Task<IEnumerable<NeuroAssessment>> FindByPatientIdAsync(long patientId);
+    Task<IEnumerable<NeuroAssessment>> FindByNeurologistIdAsync(long neurologistId);
 }
