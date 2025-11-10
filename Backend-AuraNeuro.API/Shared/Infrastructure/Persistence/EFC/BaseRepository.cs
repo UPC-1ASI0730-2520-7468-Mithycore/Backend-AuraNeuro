@@ -16,7 +16,7 @@ public class BaseRepository<TEntity>(AppDbContext appDbContext): IBaseRepository
         return await appDbContext.Set<TEntity>().ToListAsync();
     }
 
-    public async Task<TEntity?> FindByIdAsync(int id)
+    public async Task<TEntity?> FindByIdAsync(long id)
     {
         return await appDbContext.Set<TEntity>().FindAsync(id);
     }

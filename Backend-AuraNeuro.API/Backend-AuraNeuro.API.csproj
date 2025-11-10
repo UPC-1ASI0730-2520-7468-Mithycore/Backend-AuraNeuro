@@ -32,8 +32,6 @@
       <Folder Include="Appointment\Domain\Model\" />
       <Folder Include="Appointment\Infrastructure\" />
       <Folder Include="Appointment\Interface\" />
-      <Folder Include="IAM\Application\Internal\QueryServices\" />
-      <Folder Include="IAM\Domain\Model\Queries\" />
       <Folder Include="Neurologist\Application\Internal\CommandServices\" />
       <Folder Include="Neurologist\Domain\Model\" />
       <Folder Include="Neurologist\Infrastructure\" />

@@ -4,8 +4,10 @@ using Backend_AuraNeuro.API.IAM.Domain.Services;
 using Backend_AuraNeuro.API.IAM.Infrastructure.Persistence.EFC.Repositories;
 using Backend_AuraNeuro.API.IAM.Infrastructure.Security;
 using Backend_AuraNeuro.API.NeurologicalHealth.Applications.Internal.CommandServices;
+using Backend_AuraNeuro.API.NeurologicalHealth.Applications.Internal.QueryServices;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Repositories;
-using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services;
+using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services.Command;
+using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services.Queries;
 using Backend_AuraNeuro.API.NeurologicalHealth.Infrastructure.Persistence.EFC.Repositories;
 using Backend_AuraNeuro.API.Shared.Domain.Repositories;
 using Backend_AuraNeuro.API.Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions;
@@ -57,7 +59,8 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 
 //NeurologicalHealth Bounded Context
 builder.Services.AddScoped<INeurologicalHealthRepository, NeurologicalHealthRepository>();
-builder.Services.AddScoped<INeuroAssessmentService, NeuroAssessmentService>();
+builder.Services.AddScoped<INeuroAssessmentCommandService, NeuroAssessmentCommandService>();
+builder.Services.AddScoped<INeuroAssessmentQueryService, NeuroAssessmentQueryService>();
 
 var app = builder.Build();
 
