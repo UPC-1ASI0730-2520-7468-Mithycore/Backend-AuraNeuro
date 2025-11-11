@@ -37,7 +37,6 @@
       <Folder Include="Neurologist\Infrastructure\" />
       <Folder Include="Neurologist\Interface\" />
       <Folder Include="Patient\Application\" />
-      <Folder Include="Patient\Domain\Model\" />
       <Folder Include="Patient\Infrastructure\" />
       <Folder Include="Patient\Interface\" />
       <Folder Include="Prescription\Application\" />
