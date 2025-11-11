@@ -1,4 +1,3 @@
-using Backend_AuraNeuro.API.IAM.Domain.Model.Aggregates;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Humanizer;
@@ -32,32 +31,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
 
             entityType.SetTableName(desiredTableName);
         }
-
-        modelBuilder.Entity<User>().HasKey(f => f.Id);
-        modelBuilder.Entity<User>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
-        modelBuilder.Entity<User>().Property(f => f.Names).IsRequired();
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.OwnsOne(u => u.Email, email =>
-            {
-                email.Property(e => e.DirectionEmail)
-                    .HasColumnName("Email")
-                    .IsRequired()
-                    .HasMaxLength(150);
-            });
-        });
-
-        modelBuilder.Entity<User>().Property(f => f.PasswordHash).IsRequired();
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.OwnsOne(u => u.Role, role =>
-            {
-                role.Property(r => r.UserRole)
-                    .HasColumnName("Role")
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-        });
+        
         //Bounded context NeurologicalHealth
         modelBuilder.Entity<NeuroAssessment>().HasKey(n => n.Id);
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
