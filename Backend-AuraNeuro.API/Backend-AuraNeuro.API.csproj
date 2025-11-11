@@ -33,7 +33,6 @@
       <Folder Include="Appointment\Infrastructure\" />
       <Folder Include="Appointment\Interface\" />
       <Folder Include="Neurologist\Application\Internal\CommandServices\" />
-      <Folder Include="Neurologist\Domain\Model\" />
       <Folder Include="Neurologist\Infrastructure\" />
       <Folder Include="Neurologist\Interface\" />
       <Folder Include="Patient\Application\" />
