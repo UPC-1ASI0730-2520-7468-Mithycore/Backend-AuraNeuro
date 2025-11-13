@@ -32,9 +32,6 @@
       <Folder Include="Appointment\Domain\Model\" />
       <Folder Include="Appointment\Infrastructure\" />
       <Folder Include="Appointment\Interface\" />
-      <Folder Include="Neurologist\Application\Internal\CommandServices\" />
-      <Folder Include="Neurologist\Infrastructure\" />
-      <Folder Include="Neurologist\Interface\" />
       <Folder Include="Patient\Application\" />
       <Folder Include="Patient\Domain\Model\" />
       <Folder Include="Patient\Infrastructure\" />

@@ -1,0 +1,1 @@
+﻿global using Neurologist = Backend_AuraNeuro.API.Neurologist.Domain.Model.Aggregates.Neurologist;

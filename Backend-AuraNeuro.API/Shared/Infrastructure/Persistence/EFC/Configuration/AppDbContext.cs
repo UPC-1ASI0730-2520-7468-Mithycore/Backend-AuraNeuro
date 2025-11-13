@@ -2,6 +2,9 @@ using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Model.Aggregates;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Humanizer;
 using Microsoft.EntityFrameworkCore;
+using Backend_AuraNeuro.API.Neurologist.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
+
 
 namespace Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
@@ -50,6 +53,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.NeurologistNotes);
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.IsFlagged);
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.AlertLevel);
+        
+        // Neurologist
+        modelBuilder.ApplyNeurologistsConfiguration(); 
+        // modelBuilder.UseSnakeCaseNamingConvention();
+
+
+        
+
         
     }
 }

@@ -11,6 +11,18 @@ using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 
+
+//using neurologist
+using Backend_AuraNeuro.API.Neurologist.Application.Internal.CommandServices;
+using Backend_AuraNeuro.API.Neurologist.Application.Internal.QueryServices;
+using Backend_AuraNeuro.API.Neurologist.Domain.Services.Command;
+using Backend_AuraNeuro.API.Neurologist.Domain.Services.Queries;
+using Backend_AuraNeuro.API.Neurologist.Domain.Repositories;
+using Backend_AuraNeuro.API.Neurologist.Infrastructure.Persistence.EFC.Repositories;
+
+using Backend_AuraNeuro.API.Neurologist.Infrastructure.Persistence.ASP.Configuration.Extensions;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -52,6 +64,12 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<INeurologicalHealthRepository, NeurologicalHealthRepository>();
 builder.Services.AddScoped<INeuroAssessmentCommandService, NeuroAssessmentCommandService>();
 builder.Services.AddScoped<INeuroAssessmentQueryService, NeuroAssessmentQueryService>();
+
+// Neurologist Bounded Context
+builder.Services.AddScoped<INeurologistRepository, NeurologistRepository>();
+builder.Services.AddScoped<INeurologistCommandService, NeurologistCommandService>();
+builder.Services.AddScoped<INeurologistQueryService, NeurologistQueryService>();
+builder.AddNeurologistsContextServices();
 
 var app = builder.Build();
 
