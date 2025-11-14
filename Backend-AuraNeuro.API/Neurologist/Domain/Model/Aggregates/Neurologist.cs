@@ -1,4 +1,4 @@
-﻿using Backend_AuraNeuro.API.Neurologist.Domain.Model.Commands;
+﻿using Backend_AuraNeuro.API.Neurologist.Domain.Commands;
 using Backend_AuraNeuro.API.Neurologist.Domain.Model.ValueObjects;
 
 namespace Backend_AuraNeuro.API.Neurologist.Domain.Model.Aggregates;

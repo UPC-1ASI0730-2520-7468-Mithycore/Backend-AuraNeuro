@@ -1,4 +1,4 @@
-﻿namespace Backend_AuraNeuro.API.Neurologist.Interfaces.REST.Resources;
+﻿namespace Backend_AuraNeuro.API.Neurologist.Interface.REST.Resources;
 
 /// <summary>
 /// Resource to update the neurologist's profile (PATCH).

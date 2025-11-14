@@ -4,8 +4,6 @@ using Backend_AuraNeuro.API.Neurologist.Domain.Repositories;
 using Backend_AuraNeuro.API.Neurologist.Domain.Services.Command;
 using Backend_AuraNeuro.API.Neurologist.Domain.Services.Queries;
 using Backend_AuraNeuro.API.Neurologist.Infrastructure.Persistence.EFC.Repositories;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Backend_AuraNeuro.API.Neurologist.Infrastructure.Persistence.ASP.Configuration.Extensions
 {

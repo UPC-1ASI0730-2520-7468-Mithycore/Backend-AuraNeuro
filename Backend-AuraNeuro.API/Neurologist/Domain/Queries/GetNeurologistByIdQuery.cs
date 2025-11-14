@@ -1,4 +1,4 @@
-﻿namespace Backend_AuraNeuro.API.Neurologist.Domain.Model.Queries;
+﻿namespace Backend_AuraNeuro.API.Neurologist.Domain.Queries;
 
 /// <summary>
 /// Query to get a neurologist by their Id.

@@ -1,4 +1,4 @@
-﻿using Backend_AuraNeuro.API.Neurologist.Domain.Model.Commands;
+﻿using Backend_AuraNeuro.API.Neurologist.Domain.Commands;
 using Backend_AuraNeuro.API.Neurologist.Domain.Repositories;
 using Backend_AuraNeuro.API.Neurologist.Domain.Services.Command;
 using Backend_AuraNeuro.API.Shared.Domain.Repositories;

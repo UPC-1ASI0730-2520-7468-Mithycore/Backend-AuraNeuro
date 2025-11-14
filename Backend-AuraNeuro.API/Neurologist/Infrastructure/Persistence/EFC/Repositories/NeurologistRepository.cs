@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Backend_AuraNeuro.API.Neurologist.Domain.Repositories;
+﻿using Backend_AuraNeuro.API.Neurologist.Domain.Repositories;
 using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using Microsoft.EntityFrameworkCore;
 using NeurologistProfile = Backend_AuraNeuro.API.Neurologist.Domain.Model.Aggregates.Neurologist;

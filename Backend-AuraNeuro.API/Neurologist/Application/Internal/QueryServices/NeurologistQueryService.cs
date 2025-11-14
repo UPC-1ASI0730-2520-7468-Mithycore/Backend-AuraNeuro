@@ -1,4 +1,4 @@
-﻿using Backend_AuraNeuro.API.Neurologist.Domain.Model.Queries;
+﻿using Backend_AuraNeuro.API.Neurologist.Domain.Queries;
 using Backend_AuraNeuro.API.Neurologist.Domain.Repositories;
 using Backend_AuraNeuro.API.Neurologist.Domain.Services.Queries;
 using NeurologistProfile = Backend_AuraNeuro.API.Neurologist.Domain.Model.Aggregates.Neurologist;

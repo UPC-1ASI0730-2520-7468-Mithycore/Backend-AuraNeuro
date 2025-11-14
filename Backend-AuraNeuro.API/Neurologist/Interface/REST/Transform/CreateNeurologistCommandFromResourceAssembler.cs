@@ -1,7 +1,7 @@
-﻿using Backend_AuraNeuro.API.Neurologist.Domain.Model.Commands;
-using Backend_AuraNeuro.API.Neurologist.Interfaces.REST.Resources;
+﻿using Backend_AuraNeuro.API.Neurologist.Domain.Commands;
+using Backend_AuraNeuro.API.Neurologist.Interface.REST.Resources;
 
-namespace Backend_AuraNeuro.API.Neurologist.Interfaces.REST.Transform;
+namespace Backend_AuraNeuro.API.Neurologist.Interface.REST.Transform;
 
 public static class CreateNeurologistCommandFromResourceAssembler
 {

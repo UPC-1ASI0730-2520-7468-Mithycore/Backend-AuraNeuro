@@ -1,4 +1,4 @@
-﻿namespace Backend_AuraNeuro.API.Neurologist.Domain.Model.Commands;
+﻿namespace Backend_AuraNeuro.API.Neurologist.Domain.Commands;
 
 /// <summary>
 /// Command to update the full profile (address, specialties, verification).

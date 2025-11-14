@@ -1,14 +1,14 @@
 ﻿using System.Net.Mime;
-using Backend_AuraNeuro.API.Neurologist.Domain.Model.Commands;
-using Backend_AuraNeuro.API.Neurologist.Domain.Model.Queries;
+using Backend_AuraNeuro.API.Neurologist.Domain.Commands;
+using Backend_AuraNeuro.API.Neurologist.Domain.Queries;
 using Backend_AuraNeuro.API.Neurologist.Domain.Services.Command;
 using Backend_AuraNeuro.API.Neurologist.Domain.Services.Queries;
-using Backend_AuraNeuro.API.Neurologist.Interfaces.REST.Resources;
-using Backend_AuraNeuro.API.Neurologist.Interfaces.REST.Transform;
+using Backend_AuraNeuro.API.Neurologist.Interface.REST.Resources;
+using Backend_AuraNeuro.API.Neurologist.Interface.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Backend_AuraNeuro.API.Neurologist.Interfaces.REST;
+namespace Backend_AuraNeuro.API.Neurologist.Interface.REST.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
