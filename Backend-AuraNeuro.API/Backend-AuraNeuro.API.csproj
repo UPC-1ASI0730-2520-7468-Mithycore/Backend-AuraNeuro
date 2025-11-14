@@ -40,10 +40,6 @@
       <Folder Include="Patient\Domain\Model\" />
       <Folder Include="Patient\Infrastructure\" />
       <Folder Include="Patient\Interface\" />
-      <Folder Include="Prescription\Application\" />
-      <Folder Include="Prescription\Domain\Model\" />
-      <Folder Include="Prescription\Infrastructure\" />
-      <Folder Include="Prescription\Interface\" />
       <Folder Include="SubscriptionManagement\Application\" />
       <Folder Include="SubscriptionManagement\Domail\Model\" />
       <Folder Include="SubscriptionManagement\Infrastructure\" />

@@ -3,6 +3,10 @@ using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Humanizer;
 using Microsoft.EntityFrameworkCore;
 
+//bounded context prescription
+using Backend_AuraNeuro.API.Prescriptions.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
+
 namespace Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
@@ -50,6 +54,11 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.NeurologistNotes);
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.IsFlagged);
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.AlertLevel);
+        
+        //Bounded context Prescription
+        modelBuilder.ApplyPrescriptionsConfiguration();
+
+
         
     }
 }
