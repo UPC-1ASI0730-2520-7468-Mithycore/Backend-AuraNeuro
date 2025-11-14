@@ -1,8 +1,8 @@
-﻿namespace Backend_AuraNeuro.API.Appointments.Infrastructure.Persistence.EFC.Configuration;
-
-using Backend_AuraNeuro.API.Appointments.Domain.Model.Aggregates;
+﻿using Backend_AuraNeuro.API.Appointments.Domain.Model.Aggregates;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Backend_AuraNeuro.API.Appointments.Infrastructure.Persistence.EFC.Configuration.Extensions;
 
 public static class ModelBuilderExtensions
 {
@@ -13,18 +13,22 @@ public static class ModelBuilderExtensions
 
     private static void ConfigureAppointment(EntityTypeBuilder<Appointment> entity)
     {
+        // Nombre FINAL de la tabla
         entity.ToTable("appointments");
 
+        // Primary Key
         entity.HasKey(a => a.Id);
+        entity.Property(a => a.Id)
+            .IsRequired()
+            .ValueGeneratedOnAdd();
 
-        entity.Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
+        // Required fields
         entity.Property(a => a.NeurologistId).IsRequired();
         entity.Property(a => a.PatientId).IsRequired();
         entity.Property(a => a.Date).IsRequired();
-        entity.Property(a => a.Status).IsRequired();
-        entity.Property(a => a.Notes).IsRequired(false);
+        entity.Property(a => a.Status).IsRequired().HasMaxLength(50);
+        entity.Property(a => a.Notes).HasMaxLength(500);
 
-        entity.Property(a => a.CreatedDate).HasColumnName("created_at");
-        entity.Property(a => a.UpdatedDate).HasColumnName("updated_at");
+        // Created/Updated (audit)
     }
 }
