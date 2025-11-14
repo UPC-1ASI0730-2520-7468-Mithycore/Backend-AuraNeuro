@@ -4,6 +4,14 @@ using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Repositories;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services.Command;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services.Queries;
 using Backend_AuraNeuro.API.NeurologicalHealth.Infrastructure.Persistence.EFC.Repositories;
+
+using Backend_AuraNeuro.API.Patient.Application.Internal.CommandServices;
+using Backend_AuraNeuro.API.Patient.Application.Internal.QueryServices;
+using Backend_AuraNeuro.API.Patient.Domain.Repositories;
+using Backend_AuraNeuro.API.Patient.Domain.Services.Command;
+using Backend_AuraNeuro.API.Patient.Domain.Services.Queries;
+using Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Repositories;
+
 using Backend_AuraNeuro.API.Shared.Domain.Repositories;
 using Backend_AuraNeuro.API.Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC;
@@ -51,6 +59,11 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<INeurologicalHealthRepository, NeurologicalHealthRepository>();
 builder.Services.AddScoped<INeuroAssessmentCommandService, NeuroAssessmentCommandService>();
 builder.Services.AddScoped<INeuroAssessmentQueryService, NeuroAssessmentQueryService>();
+
+// Patient Bounded Context
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IPatientCommandService, PatientCommandService>();
+builder.Services.AddScoped<IPatientQueryService, PatientQueryService>();
 
 var app = builder.Build();
 

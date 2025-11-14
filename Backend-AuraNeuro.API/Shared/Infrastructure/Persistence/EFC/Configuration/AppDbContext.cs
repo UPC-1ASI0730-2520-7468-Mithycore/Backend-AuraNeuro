@@ -3,6 +3,9 @@ using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Humanizer;
 using Microsoft.EntityFrameworkCore;
 
+// Importamos configuraciones de los bounded contexts
+using Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
 namespace Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
@@ -17,6 +20,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     {
         base.OnModelCreating(modelBuilder);
 
+        // ====== CONVENCIÓN global: pluralize + snake_case ======
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
             var currentTableName = entityType.GetTableName();
@@ -25,14 +29,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             }
 
             var desiredTableName = entityType.ClrType.Name
-                .Pluralize() // Patient -> Patients
-                .Underscore() // PatientMetrics -> patient_metrics
+                .Pluralize()
+                .Underscore()
                 .ToLowerInvariant();
 
             entityType.SetTableName(desiredTableName);
         }
-        
-        //Bounded context NeurologicalHealth
+
+        // ========= Bounded Context: NeurologicalHealth =========
         modelBuilder.Entity<NeuroAssessment>().HasKey(n => n.Id);
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.PatientId);
@@ -50,6 +54,9 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.NeurologistNotes);
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.IsFlagged);
         modelBuilder.Entity<NeuroAssessment>().Property(n => n.AlertLevel);
-        
+
+        // ========= Patient Bounded Context (lo nuevo) =========
+        modelBuilder.ApplyConfiguration(new PatientNeurologistConfiguration());
+        modelBuilder.ApplyPatientsConfiguration();
     }
 }
