@@ -1,79 +1,49 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>Backend_AuraNeuro.API</RootNamespace>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Backend_AuraNeuro.API</RootNamespace>
-  </PropertyGroup>
+    <ItemGroup>
+        <!-- Audit Trails related packages -->
+        <PackageReference Include="EntityFrameworkCore.CreatedUpdatedDate" Version="8.0.0" />
+        <!-- Entity Framework Core related packages-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.10" />
+        <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
+        <!--MySql Entity Framework core Related Packaages -->
+        <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.9" />
+        <!-- Naming conteion related packages -->
+        <PackageReference Include="Humanizer" Version="2.14.1" />
+        <!-- Swagger / OpenApi related packages-->
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10"/>
+        <PackageReference Include="Stripe.net" Version="49.2.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="9.0.6" />
+        <!-- Jwt related Packages -->
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.10"/>
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <!-- Audit Trails related packages -->
-    <PackageReference Include="EntityFrameworkCore.CreatedUpdatedDate" Version="8.0.0" />
-
-    <!-- Entity Framework Core packages -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.10" />
-    <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
-
-    <!-- MySQL EF Core provider -->
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.9" />
-
-    <!-- String manipulation helpers -->
-    <PackageReference Include="Humanizer" Version="2.14.1" />
-
-    <!-- Swagger documentation -->
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="9.0.6" />
-
-    <!-- JWT Auth packages -->
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.10" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- Neurologist bounded context -->
-    <Folder Include="Neurologist\Application\Internal\CommandServices\" />
-    <Folder Include="Neurologist\Domain\Model\" />
-    <Folder Include="Neurologist\Infrastructure\" />
-    <Folder Include="Neurologist\Interface\" />
-
-    <!-- Patient bounded context -->
-    <Folder Include="Patient\Application\" />
-    <Folder Include="Patient\Domain\Model\" />
-    <Folder Include="Patient\Infrastructure\" />
-    <Folder Include="Patient\Interface\" />
-
-    <!-- Prescription bounded context -->
-    <Folder Include="Prescription\Application\" />
-    <Folder Include="Prescription\Domain\Model\" />
-    <Folder Include="Prescription\Infrastructure\" />
-    <Folder Include="Prescription\Interface\" />
-
-    <!-- Subscription Management bounded context -->
-    <Folder Include="SubscriptionManagement\Application\" />
-    <Folder Include="SubscriptionManagement\Domail\Model\" />
-    <Folder Include="SubscriptionManagement\Infrastructure\" />
-    <Folder Include="SubscriptionManagement\Interface\" />
-
-    <!-- ⭐ APPOINTMENTS BOUNDED CONTEXT ⭐ -->
-    <Folder Include="Appointments\Application\Internal\CommandServices\" />
-    <Folder Include="Appointments\Application\Internal\QueryServices\" />
-
-    <Folder Include="Appointments\Domain\Model\Aggregates\" />
-    <Folder Include="Appointments\Domain\Model\Commands\" />
-    <Folder Include="Appointments\Domain\Model\Queries\" />
-
-    <Folder Include="Appointments\Domain\Repositories\" />
-    <Folder Include="Appointments\Domain\Services\Command\" />
-    <Folder Include="Appointments\Domain\Services\Queries\" />
-
-    <Folder Include="Appointments\Infrastructure\Persistence\EFC\Configuration\Extensions\" />
-    <Folder Include="Appointments\Infrastructure\Persistence\EFC\Repositories\" />
-
-    <Folder Include="Appointments\Interfaces\REST\Controllers\" />
-    <Folder Include="Appointments\Interfaces\REST\Resources\" />
-  </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Appointment\Application\" />
+      <Folder Include="Appointment\Domain\Model\" />
+      <Folder Include="Appointment\Infrastructure\" />
+      <Folder Include="Appointment\Interface\" />
+      <Folder Include="Neurologist\Application\Internal\CommandServices\" />
+      <Folder Include="Neurologist\Domain\Model\" />
+      <Folder Include="Neurologist\Infrastructure\" />
+      <Folder Include="Neurologist\Interface\" />
+      <Folder Include="Patient\Application\" />
+      <Folder Include="Patient\Domain\Model\" />
+      <Folder Include="Patient\Infrastructure\" />
+      <Folder Include="Patient\Interface\" />
+      <Folder Include="Prescription\Application\" />
+      <Folder Include="Prescription\Domain\Model\" />
+      <Folder Include="Prescription\Infrastructure\" />
+      <Folder Include="Prescription\Interface\" />
+    </ItemGroup>
 
 </Project>
