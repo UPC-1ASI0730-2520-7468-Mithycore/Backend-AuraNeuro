@@ -5,6 +5,9 @@ using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Humanizer;
 using Microsoft.EntityFrameworkCore;
 
+// Importamos configuraciones de los bounded contexts
+using Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
 namespace Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
@@ -21,6 +24,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
 
         // ------------------------------------------------
         // REGISTER ALL ENTITY CONFIGURATIONS FIRST
@@ -53,6 +57,7 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         // ------------------------------------------------
         // APPLY SNAKE_CASE + PLURALIZATION AFTER CONFIGS
         // ------------------------------------------------
+
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
             if (entityType.ClrType == typeof(Appointment))
@@ -66,5 +71,8 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             entityType.SetTableName(desiredTableName);
         }
 
+        // ========= Patient Bounded Context (lo nuevo) =========
+        modelBuilder.ApplyConfiguration(new PatientNeurologistConfiguration());
+        modelBuilder.ApplyPatientsConfiguration();
     }
 }
