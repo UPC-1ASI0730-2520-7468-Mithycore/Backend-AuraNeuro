@@ -50,14 +50,14 @@ public class PatientsController : ControllerBase
     }
 
     // GET /api/v1/patients/{patientId}
-    [HttpGet("{patientId:int}")]
+    [HttpGet("{patientId:long}")]
     [SwaggerOperation(
         Summary = "Get patient profile",
         Description = "Returns the profile of a patient by Id.",
         OperationId = "GetPatientById")]
     [SwaggerResponse(StatusCodes.Status200OK, "Patient found", typeof(PatientResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Patient not found")]
-    public async Task<IActionResult> GetPatientById(int patientId)
+    public async Task<IActionResult> GetPatientById(long patientId)
     {
         var query = new GetPatientByIdQuery(patientId);
         var patient = await _patientQueryService.Handle(query);
@@ -85,7 +85,7 @@ public class PatientsController : ControllerBase
     }
 
     // PATCH /api/v1/patients/{patientId}
-    [HttpPatch("{patientId:int}")]
+    [HttpPatch("{patientId:long}")]
     [SwaggerOperation(
         Summary = "Update patient profile",
         Description = "Updates contact info and address of a patient.",
@@ -93,7 +93,7 @@ public class PatientsController : ControllerBase
     [SwaggerResponse(StatusCodes.Status200OK, "Profile updated", typeof(PatientResource))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Patient not found")]
     public async Task<IActionResult> UpdatePatientProfile(
-        int patientId,
+        long patientId,
         [FromBody] UpdatePatientProfileResource resource)
     {
         var command = UpdatePatientProfileCommandFromResourceAssembler
@@ -107,14 +107,14 @@ public class PatientsController : ControllerBase
     }
 
     // DELETE /api/v1/patients/{patientId}
-    [HttpDelete("{patientId:int}")]
+    [HttpDelete("{patientId:long}")]
     [SwaggerOperation(
         Summary = "Soft delete patient",
         Description = "Deactivates the patient profile.",
         OperationId = "DeletePatientProfile")]
     [SwaggerResponse(StatusCodes.Status204NoContent, "Patient deactivated")]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Patient not found")]
-    public async Task<IActionResult> DeletePatient(int patientId)
+    public async Task<IActionResult> DeletePatient(long patientId)
     {
         var command = new DeactivatePatientCommand(patientId);
         var success = await _patientCommandService.Handle(command);
@@ -124,13 +124,13 @@ public class PatientsController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost("{patientId:int}/neurologists")]
+    [HttpPost("{patientId:long}/neurologists")]
     [SwaggerOperation(
         Summary = "Assign neurologist to patient",
         Description = "Associates a neurologist with a patient.",
         OperationId = "AssignNeurologistToPatient")]
     public async Task<IActionResult> AssignNeurologist(
-        int patientId,
+        long patientId,
         [FromBody] AssignNeurologistResource body)
     {
         var success = await _patientCommandService.AssignNeurologistAsync(patientId, body.NeurologistId);
@@ -140,12 +140,12 @@ public class PatientsController : ControllerBase
         return Ok(new { message = "Neurologist assigned successfully." });
     }
 
-    [HttpDelete("{patientId:int}/neurologists/{neurologistId:long}")]
+    [HttpDelete("{patientId:long}/neurologists/{neurologistId:long}")]
     [SwaggerOperation(
         Summary = "Remove neurologist association",
         Description = "Removes neurologist from the patient.",
         OperationId = "RemoveNeurologistFromPatient")]
-    public async Task<IActionResult> RemoveNeurologist(int patientId, long neurologistId)
+    public async Task<IActionResult> RemoveNeurologist(long patientId, long neurologistId)
     {
         var success = await _patientCommandService.RemoveNeurologistAsync(patientId, neurologistId);
 

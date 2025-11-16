@@ -14,7 +14,7 @@ public interface IPatientCommandService
 
     Task<bool> Handle(DeactivatePatientCommand command);
     
-    Task<bool> AssignNeurologistAsync(int patientId, long neurologistId);
+    Task<bool> AssignNeurologistAsync(long patientId, long neurologistId);
 
-    Task<bool> RemoveNeurologistAsync(int patientId, long neurologistId);
+    Task<bool> RemoveNeurologistAsync(long patientId, long neurologistId);
 }

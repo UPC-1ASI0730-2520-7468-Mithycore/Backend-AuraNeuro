@@ -6,7 +6,7 @@ namespace Backend_AuraNeuro.API.Patient.Interface.REST.Transform;
 public static class UpdatePatientProfileCommandFromResourceAssembler
 {
     public static UpdatePatientProfileCommand ToCommandFromResource(
-        int patientId,
+        long patientId,
         UpdatePatientProfileResource resource) =>
         new(
             patientId,

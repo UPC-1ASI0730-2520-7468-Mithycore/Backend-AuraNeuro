@@ -67,7 +67,7 @@ public class PatientCommandService : IPatientCommandService
         return true;
     }
 
-    public async Task<bool> AssignNeurologistAsync(int patientId, long neurologistId)
+    public async Task<bool> AssignNeurologistAsync(long patientId, long neurologistId)
     {
         var success = await _patientRepository.AssignNeurologistAsync(patientId, neurologistId);
         if (!success) return false;
@@ -76,7 +76,7 @@ public class PatientCommandService : IPatientCommandService
         return true;
     }
 
-    public async Task<bool> RemoveNeurologistAsync(int patientId, long neurologistId)
+    public async Task<bool> RemoveNeurologistAsync(long patientId, long neurologistId)
     {
         var success = await _patientRepository.RemoveNeurologistAsync(patientId, neurologistId);
         if (!success) return false;

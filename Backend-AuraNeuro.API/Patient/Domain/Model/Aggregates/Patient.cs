@@ -8,8 +8,8 @@ namespace Backend_AuraNeuro.API.Patient.Domain.Model.Aggregates;
 /// </summary>
 public partial class Patient
 {
-    public int Id { get; private set; }
-
+    public long Id { get; private set; }
+    
     public Guid UserId { get; private set; }
     public PersonName Name { get; private set; }
     public EmailAddress Email { get; private set; }
