@@ -31,6 +31,9 @@ using Backend_AuraNeuro.API.Shared.Infrastructure.Interfaces.ASP.Configuration.E
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 
+//bounded context Prescription
+using Backend_AuraNeuro.API.Prescriptions.Infrastructure.Interfaces.ASP.Configuration.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -88,6 +91,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<INeurologicalHealthRepository, NeurologicalHealthRepository>();
 builder.Services.AddScoped<INeuroAssessmentCommandService, NeuroAssessmentCommandService>();
 builder.Services.AddScoped<INeuroAssessmentQueryService, NeuroAssessmentQueryService>();
+
+//Prescription Bounded Context
+builder.AddPrescriptionsContextServices();
 
 
 // Patient Bounded Context

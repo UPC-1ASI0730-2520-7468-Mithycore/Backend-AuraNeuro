@@ -5,8 +5,12 @@ using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Humanizer;
 using Microsoft.EntityFrameworkCore;
 
+//bounded context prescription
+using Backend_AuraNeuro.API.Prescriptions.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
 // Importamos configuraciones de los bounded contexts
 using Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
 
 namespace Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
@@ -70,9 +74,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
 
             entityType.SetTableName(desiredTableName);
         }
+        
+        //Bounded context Prescription
+        modelBuilder.ApplyPrescriptionsConfiguration();
+
 
         // ========= Patient Bounded Context (lo nuevo) =========
         modelBuilder.ApplyConfiguration(new PatientNeurologistConfiguration());
         modelBuilder.ApplyPatientsConfiguration();
+
     }
 }
