@@ -1,0 +1,37 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_aura
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: auraneurodb
+      MYSQL_USER: userapp
+      MYSQL_PASSWORD: user123
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - aura_network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: auraneuro_api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "server=mysql;port=3306;database=auraneurodb;user=userapp;password=user123"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - aura_network
+
+networks:
+  aura_network:
+
+volumes:
+  mysql_data:
