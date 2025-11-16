@@ -5,7 +5,7 @@ namespace Backend_AuraNeuro.API.Patient.Domain.Command;
 /// Used for PATCH operations.
 /// </summary>
 public record UpdatePatientProfileCommand(
-    int PatientId,
+    long PatientId,
     string Email,
     string PhoneNumber,
     string? Street,

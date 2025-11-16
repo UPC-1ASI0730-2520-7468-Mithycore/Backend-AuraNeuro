@@ -18,6 +18,6 @@ public interface IPatientRepository : IBaseRepository<Model.Aggregates.Patient>
     /// </summary>
     Task<Model.Aggregates.Patient?> FindByEmailAsync(string email);
     
-    Task<bool> AssignNeurologistAsync(int patientId, long neurologistId);
-    Task<bool> RemoveNeurologistAsync(int patientId, long neurologistId);
+    Task<bool> AssignNeurologistAsync(long patientId, long neurologistId);
+    Task<bool> RemoveNeurologistAsync(long patientId, long neurologistId);
 }

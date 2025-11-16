@@ -4,7 +4,7 @@ namespace Backend_AuraNeuro.API.Patient.Interface.REST.Resources;
 /// Resource to update the neurologist's profile (PATCH).
 /// </summary>
 public record PatientResource(
-    int Id,
+    long Id,
     Guid UserId,
     string FullName,
     string Email,

@@ -69,7 +69,7 @@ namespace Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Repositor
         //       NUEVOS MÉTODOS PARA PACIENTE–NEURÓLOGO
         // -------------------------------------------------------
 
-        public async Task<bool> AssignNeurologistAsync(int patientId, long neurologistId)
+        public async Task<bool> AssignNeurologistAsync(long patientId, long neurologistId)
         {
             var exists = await _context.Set<PatientNeurologist>()
                 .AnyAsync(r => r.PatientId == patientId && r.NeurologistId == neurologistId);
@@ -88,7 +88,7 @@ namespace Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Repositor
             return true;
         }
 
-        public async Task<bool> RemoveNeurologistAsync(int patientId, long neurologistId)
+        public async Task<bool> RemoveNeurologistAsync(long patientId, long neurologistId)
         {
             var relation = await _context.Set<PatientNeurologist>()
                 .FirstOrDefaultAsync(r => r.PatientId == patientId && r.NeurologistId == neurologistId);

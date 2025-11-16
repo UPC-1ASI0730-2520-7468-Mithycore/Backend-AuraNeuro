@@ -14,7 +14,7 @@ public class PatientAudit
     /// <summary>
     /// The patient this audit entry refers to.
     /// </summary>
-    public int PatientId { get; set; }
+    public long PatientId { get; set; }
 
     /// <summary>
     /// The action performed (e.g., "Created", "UpdatedContact", "UpdatedAddress", "Deactivated").
