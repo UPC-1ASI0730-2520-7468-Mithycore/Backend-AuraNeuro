@@ -1,8 +1,3 @@
-using Backend_AuraNeuro.API.IAM.Application.Internal.CommandServices;
-using Backend_AuraNeuro.API.IAM.Domain.Repositories;
-using Backend_AuraNeuro.API.IAM.Domain.Services;
-using Backend_AuraNeuro.API.IAM.Infrastructure.Persistence.EFC.Repositories;
-using Backend_AuraNeuro.API.IAM.Infrastructure.Security;
 using Backend_AuraNeuro.API.NeurologicalHealth.Applications.Internal.CommandServices;
 using Backend_AuraNeuro.API.NeurologicalHealth.Applications.Internal.QueryServices;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Repositories;
@@ -19,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 // change names tha controller to kebab-case
 builder.Services.AddControllers(options =>
 {
@@ -26,6 +22,17 @@ builder.Services.AddControllers(options =>
     options.Conventions.Add(new RouteTokenTransformerConvention(
         new KebabCaseParameterTransformer()
     ));
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -52,11 +59,6 @@ if (builder.Environment.IsDevelopment())
 // Shared Bounded Context
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-// Iam Bounded Context
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserCommandService, UserCommandService>();
-builder.Services.AddScoped<IJwtService, JwtService>();
-
 //NeurologicalHealth Bounded Context
 builder.Services.AddScoped<INeurologicalHealthRepository, NeurologicalHealthRepository>();
 builder.Services.AddScoped<INeuroAssessmentCommandService, NeuroAssessmentCommandService>();
@@ -80,9 +82,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 //app.UseHttpsRedirection();
 app.UseAuthorization();
-
+app.UseCors("AllowAll");
 app.MapControllers();
 
 app.Run();
