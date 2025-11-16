@@ -1,4 +1,6 @@
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Model.Aggregates;
+using Backend_AuraNeuro.API.Appointments.Domain.Model.Aggregates;
+using Backend_AuraNeuro.API.Appointments.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Humanizer;
 using Microsoft.EntityFrameworkCore;
@@ -6,10 +8,20 @@ using Backend_AuraNeuro.API.Neurologist.Infrastructure.Persistence.EFC.Configura
 
 
 
+//bounded context prescription
+using Backend_AuraNeuro.API.Prescriptions.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
+// Importamos configuraciones de los bounded contexts
+using Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Configuration.Extensions;
+
+
 namespace Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
 {
+    public DbSet<Appointment> Appointments { get; set; }
+    public DbSet<NeuroAssessment> NeuroAssessments { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.AddCreatedUpdatedInterceptor();
@@ -20,47 +32,64 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     {
         base.OnModelCreating(modelBuilder);
 
+
+        // ------------------------------------------------
+        // REGISTER ALL ENTITY CONFIGURATIONS FIRST
+        // ------------------------------------------------
+        modelBuilder.ApplyAppointmentsConfiguration();
+
+        modelBuilder.Entity<NeuroAssessment>(entity =>
+        {
+            entity.HasKey(n => n.Id);
+            entity.Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
+            entity.Property(n => n.PatientId).IsRequired();
+            entity.Property(n => n.GaitScore).IsRequired();
+            entity.Property(n => n.BalanceScore).IsRequired();
+            entity.Property(n => n.ReflexScore).IsRequired();
+            entity.Property(n => n.CognitionScore).IsRequired();
+            entity.Property(n => n.MemoryScore).IsRequired();
+            entity.Property(n => n.SpeechScore).IsRequired();
+            entity.Property(n => n.TremorScore).IsRequired();
+            entity.Property(n => n.StrengthScore).IsRequired();
+            entity.Property(n => n.CoordinationScore).IsRequired();
+            entity.Property(n => n.SensoryScore).IsRequired();
+
+            entity.Property(n => n.EegSummary).HasMaxLength(500);
+            entity.Property(n => n.NeurologistNotes).HasMaxLength(500);
+
+            entity.Property(n => n.IsFlagged).IsRequired();
+            entity.Property(n => n.AlertLevel).IsRequired();
+        });
+
+        // ------------------------------------------------
+        // APPLY SNAKE_CASE + PLURALIZATION AFTER CONFIGS
+        // ------------------------------------------------
+
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
-            var currentTableName = entityType.GetTableName();
-            if (!string.IsNullOrWhiteSpace(currentTableName))
-            {
-            }
+            if (entityType.ClrType == typeof(Appointment))
+                continue;
 
             var desiredTableName = entityType.ClrType.Name
-                .Pluralize() // Patient -> Patients
-                .Underscore() // PatientMetrics -> patient_metrics
+                .Pluralize()
+                .Underscore()
                 .ToLowerInvariant();
 
             entityType.SetTableName(desiredTableName);
         }
-
-        //Bounded context NeurologicalHealth
-        modelBuilder.Entity<NeuroAssessment>().HasKey(n => n.Id);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.Id).IsRequired().ValueGeneratedOnAdd();
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.PatientId);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.GaitScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.BalanceScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.ReflexScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.CognitionScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.MemoryScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.SpeechScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.TremorScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.StrengthScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.CoordinationScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.SensoryScore);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.EegSummary);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.NeurologistNotes);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.IsFlagged);
-        modelBuilder.Entity<NeuroAssessment>().Property(n => n.AlertLevel);
+        
+        //Bounded context Prescription
+        modelBuilder.ApplyPrescriptionsConfiguration();
         
         // Neurologist
         modelBuilder.ApplyNeurologistsConfiguration(); 
         // modelBuilder.UseSnakeCaseNamingConvention();
 
 
-        
+        // ========= Patient Bounded Context (lo nuevo) =========
+        modelBuilder.ApplyConfiguration(new PatientNeurologistConfiguration());
+        modelBuilder.ApplyPatientsConfiguration();
 
-        
+
     }
 }
