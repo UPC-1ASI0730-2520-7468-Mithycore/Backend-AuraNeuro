@@ -85,11 +85,9 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         modelBuilder.ApplyNeurologistsConfiguration(); 
         // modelBuilder.UseSnakeCaseNamingConvention();
 
-
         // ========= Patient Bounded Context (lo nuevo) =========
         modelBuilder.ApplyConfiguration(new PatientNeurologistConfiguration());
         modelBuilder.ApplyPatientsConfiguration();
-
-
+        
     }
 }

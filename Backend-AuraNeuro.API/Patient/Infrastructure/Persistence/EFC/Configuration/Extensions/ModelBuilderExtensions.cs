@@ -40,10 +40,11 @@ namespace Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Configura
                 name.Property(n => n.LastName).HasColumnName("last_name");
             });
 
-            // Email
+            // Email (Owned Type) — UNIFICADO: columna + índice
             entity.OwnsOne(p => p.Email, email =>
             {
                 email.Property(e => e.Address).HasColumnName("email");
+                email.HasIndex(e => e.Address);
             });
 
             // Phone
@@ -69,11 +70,6 @@ namespace Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Configura
             // ========= INDEXES =========
 
             entity.HasIndex(p => p.UserId).IsUnique();
-            entity.OwnsOne(p => p.Email, email =>
-            {
-                email.Property(e => e.Address).HasColumnName("email");
-                email.HasIndex(e => e.Address);
-            });
         }
     }
 }

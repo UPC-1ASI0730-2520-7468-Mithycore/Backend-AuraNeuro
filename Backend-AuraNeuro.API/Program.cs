@@ -4,34 +4,24 @@ using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Repositories;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services.Command;
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Services.Queries;
 using Backend_AuraNeuro.API.NeurologicalHealth.Infrastructure.Persistence.EFC.Repositories;
-
-
 using Backend_AuraNeuro.API.Patient.Application.Internal.CommandServices;
 using Backend_AuraNeuro.API.Patient.Application.Internal.QueryServices;
 using Backend_AuraNeuro.API.Patient.Domain.Repositories;
 using Backend_AuraNeuro.API.Patient.Domain.Services.Command;
 using Backend_AuraNeuro.API.Patient.Domain.Services.Queries;
 using Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Repositories;
-
-
 using Backend_AuraNeuro.API.Appointments.Domain.Repositories;
 using Backend_AuraNeuro.API.Appointments.Domain.Services.Command;
 using Backend_AuraNeuro.API.Appointments.Domain.Services.Queries;
 using Backend_AuraNeuro.API.Appointments.Application.Internal.CommandServices;
 using Backend_AuraNeuro.API.Appointments.Application.Internal.QueryServices;
 using Backend_AuraNeuro.API.Appointments.Infrastructure.Persistence.EFC.Repositories;
-
-// Shared
 using Backend_AuraNeuro.API.Shared.Domain.Repositories;
-using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC;               // ✔ UnitOfWork
-using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;  // ✔ AppDbContext
-
+using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC;        
+using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;  
 using Backend_AuraNeuro.API.Shared.Infrastructure.Interfaces.ASP.Configuration.Extensions;
-
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
-
-//using neurologist
 using Backend_AuraNeuro.API.Neurologist.Application.Internal.CommandServices;
 using Backend_AuraNeuro.API.Neurologist.Application.Internal.QueryServices;
 using Backend_AuraNeuro.API.Neurologist.Domain.Services.Command;
@@ -41,9 +31,7 @@ using Backend_AuraNeuro.API.Neurologist.Infrastructure.Persistence.EFC.Repositor
 using Backend_AuraNeuro.API.Neurologist.Infrastructure.Persistence.ASP.Configuration.Extensions;
 using Backend_AuraNeuro.API.Prescriptions.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 
 // Add services to the container.
 
@@ -93,7 +81,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // -------------------------
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
 // -------------------------
 // NEUROLOGICAL HEALTH
 // -------------------------
@@ -110,7 +97,6 @@ builder.AddNeurologistsContextServices();
 //Prescription Bounded Context
 builder.AddPrescriptionsContextServices();
 
-
 // Patient Bounded Context
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IPatientCommandService, PatientCommandService>();
@@ -122,7 +108,6 @@ builder.Services.AddScoped<IPatientQueryService, PatientQueryService>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IAppointmentCommandService, AppointmentCommandService>();
 builder.Services.AddScoped<IAppointmentQueryService, AppointmentQueryService>();
-
 
 var app = builder.Build();
 
@@ -140,11 +125,10 @@ using (var scope = app.Services.CreateScope())
 // -------------------------
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.MapOpenApi();
 }
-
 
 //app.UseHttpsRedirection();
 app.UseAuthorization();
