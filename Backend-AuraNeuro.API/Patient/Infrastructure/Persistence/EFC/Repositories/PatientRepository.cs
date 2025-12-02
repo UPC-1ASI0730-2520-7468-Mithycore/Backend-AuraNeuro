@@ -100,5 +100,13 @@ namespace Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Repositor
             await _context.SaveChangesAsync();
             return true;
         }
+        
+        public async Task<IEnumerable<PatientEntity>> FindByNeurologistIdAsync(long neurologistId)
+        {
+            return await _patients
+                .Where(p => p.NeurologistId == neurologistId)
+                .ToListAsync();
+        }
+
     }
 }

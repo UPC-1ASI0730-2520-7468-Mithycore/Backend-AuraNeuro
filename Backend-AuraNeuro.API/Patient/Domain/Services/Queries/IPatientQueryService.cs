@@ -13,4 +13,6 @@ public interface IPatientQueryService
     Task<PatientModel?> Handle(GetPatientByIdQuery query);
 
     Task<PatientModel?> Handle(GetPatientByUserIdQuery query);
+    
+    Task<IEnumerable<PatientModel>> Handle(GetPatientsByNeurologistIdQuery query);
 }

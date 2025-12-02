@@ -31,4 +31,9 @@ public class PatientQueryService : IPatientQueryService
     {
         return await patientRepository.FindByUserIdAsync(query.UserId);
     }
+    
+    public async Task<IEnumerable<PatientModel>> Handle(GetPatientsByNeurologistIdQuery query)
+    {
+        return await patientRepository.FindByNeurologistIdAsync(query.NeurologistId);
+    }
 }

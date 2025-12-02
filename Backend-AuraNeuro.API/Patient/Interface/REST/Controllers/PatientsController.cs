@@ -124,33 +124,67 @@ public class PatientsController : ControllerBase
         return NoContent();
     }
 
+    // POST /api/v1/patients/{patientId}/neurologists
     [HttpPost("{patientId:long}/neurologists")]
     [SwaggerOperation(
         Summary = "Assign neurologist to patient",
         Description = "Associates a neurologist with a patient.",
         OperationId = "AssignNeurologistToPatient")]
+    [SwaggerResponse(StatusCodes.Status204NoContent, "Neurologist assigned")]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Patient not found")]
     public async Task<IActionResult> AssignNeurologist(
-        long patientId,
+        [FromRoute] long patientId,
         [FromBody] AssignNeurologistResource body)
     {
-        var success = await _patientCommandService.AssignNeurologistAsync(patientId, body.NeurologistId);
+        // Espera algo como:
+        // public class AssignNeurologistResource { public long NeurologistId { get; set; } }
 
-        if (!success) return BadRequest("Could not assign neurologist.");
+        var success = await _patientCommandService.AssignNeurologistAsync(
+            patientId,
+            body.NeurologistId);
 
-        return Ok(new { message = "Neurologist assigned successfully." });
+        if (!success)
+            return NotFound("Patient not found.");
+
+        return NoContent();
     }
 
+// DELETE /api/v1/patients/{patientId}/neurologists/{neurologistId}
     [HttpDelete("{patientId:long}/neurologists/{neurologistId:long}")]
     [SwaggerOperation(
         Summary = "Remove neurologist association",
         Description = "Removes neurologist from the patient.",
         OperationId = "RemoveNeurologistFromPatient")]
-    public async Task<IActionResult> RemoveNeurologist(long patientId, long neurologistId)
+    [SwaggerResponse(StatusCodes.Status204NoContent, "Neurologist removed")]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Relation not found")]
+    public async Task<IActionResult> RemoveNeurologist(
+        [FromRoute] long patientId,
+        [FromRoute] long neurologistId)
     {
-        var success = await _patientCommandService.RemoveNeurologistAsync(patientId, neurologistId);
+        var success = await _patientCommandService.RemoveNeurologistAsync(
+            patientId,
+            neurologistId);
 
-        if (!success) return NotFound("Relation not found.");
+        if (!success)
+            return NotFound("Relation not found.");
 
         return NoContent();
     }
+    
+    // GET /api/v1/patients/by-neurologist/{neurologistId}
+    [HttpGet("by-neurologist/{neurologistId:long}")]
+    [SwaggerOperation(
+        Summary = "List patients by neurologist",
+        Description = "Returns all patients assigned to the specified neurologist.",
+        OperationId = "GetPatientsByNeurologistId")]
+    [SwaggerResponse(StatusCodes.Status200OK, "List of patients", typeof(IEnumerable<PatientResource>))]
+    public async Task<IActionResult> GetPatientsByNeurologist(long neurologistId)
+    {
+        var query = new GetPatientsByNeurologistIdQuery(neurologistId);
+        var patients = await _patientQueryService.Handle(query);
+
+        var resources = patients.Select(PatientResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
+
 }

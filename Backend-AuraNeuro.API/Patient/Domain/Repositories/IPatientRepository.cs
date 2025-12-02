@@ -20,4 +20,7 @@ public interface IPatientRepository : IBaseRepository<Model.Aggregates.Patient>
     
     Task<bool> AssignNeurologistAsync(long patientId, long neurologistId);
     Task<bool> RemoveNeurologistAsync(long patientId, long neurologistId);
+    
+    Task<IEnumerable<Model.Aggregates.Patient>> FindByNeurologistIdAsync(long neurologistId);
+
 }

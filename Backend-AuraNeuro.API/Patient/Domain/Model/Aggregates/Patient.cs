@@ -11,6 +11,9 @@ public partial class Patient
     public long Id { get; private set; }
     
     public long UserId { get; private set; }
+    
+    // 🔗 referencia sencilla al neurólogo
+    public long? NeurologistId { get; private set; }
     public PersonName Name { get; private set; }
     public EmailAddress Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
@@ -23,6 +26,7 @@ public partial class Patient
     public Patient()
     {
         Name = new PersonName();
+        NeurologistId = null;
         Email = new EmailAddress();
         PhoneNumber = new PhoneNumber();
         BirthDate = new BirthDate(DateTime.UtcNow);
@@ -57,6 +61,20 @@ public partial class Patient
             Address = new Address(street, city, country);
         }
     }
+    
+    public void AssignNeurologist(long neurologistId)
+    {
+        if (neurologistId <= 0)
+            throw new ArgumentException("Invalid neurologist id.", nameof(neurologistId));
+
+        NeurologistId = neurologistId;
+    }
+    
+    public void RemoveNeurologist()
+    {
+        NeurologistId = null;
+    }
+
 
     /// <summary>
     /// Constructor from CreatePatientCommand.

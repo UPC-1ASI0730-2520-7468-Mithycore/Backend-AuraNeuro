@@ -67,20 +67,32 @@ public class PatientCommandService : IPatientCommandService
         return true;
     }
 
+    // ✅ asignar neurólogo usando el aggregate
     public async Task<bool> AssignNeurologistAsync(long patientId, long neurologistId)
     {
-        var success = await _patientRepository.AssignNeurologistAsync(patientId, neurologistId);
-        if (!success) return false;
+        var patient = await _patientRepository.FindByIdAsync(patientId);
+        if (patient is null) return false;
 
+        patient.AssignNeurologist(neurologistId);
+
+        _patientRepository.Update(patient);
         await _unitOfWork.CompleteAsync();
         return true;
     }
 
+    // ✅ quitar neurólogo usando el aggregate
     public async Task<bool> RemoveNeurologistAsync(long patientId, long neurologistId)
     {
-        var success = await _patientRepository.RemoveNeurologistAsync(patientId, neurologistId);
-        if (!success) return false;
+        var patient = await _patientRepository.FindByIdAsync(patientId);
+        if (patient is null) return false;
 
+        // puedes validar si el id coincide si quieres:
+        if (patient.NeurologistId != neurologistId)
+            return false; // o lanzar excepción
+
+        patient.RemoveNeurologist();
+
+        _patientRepository.Update(patient);
         await _unitOfWork.CompleteAsync();
         return true;
     }
