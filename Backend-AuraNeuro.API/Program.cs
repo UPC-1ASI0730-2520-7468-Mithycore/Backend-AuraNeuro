@@ -47,7 +47,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll", policy =>
     {
         policy
-            .WithOrigins("http://localhost:5173")   
+            .WithOrigins("https://frontend-auro-neuro-two.vercel.app")   
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
