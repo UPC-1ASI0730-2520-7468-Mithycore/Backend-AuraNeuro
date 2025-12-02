@@ -47,9 +47,10 @@ public class PrescriptionCommandService(
     {
         var prescription = await prescriptionRepository.FindByIdAsync(command.PrescriptionId);
         if (prescription is null) return null;
-
-        prescription.Revoke();
+        
+        prescriptionRepository.Remove(prescription);
         await unitOfWork.CompleteAsync();
+
         return prescription;
     }
 }
