@@ -10,7 +10,7 @@ public partial class Neurologist
 {
     public long Id { get; }
 
-    public Guid UserId { get; private set; }
+    public long UserId { get; private set; }
 
     public PersonName Name { get; private set; }
     public MedicalLicenseNumber LicenseNumber { get; private set; }
@@ -39,7 +39,7 @@ public partial class Neurologist
     }
 
     public Neurologist(
-        Guid userId,
+        long userId,
         string firstName,
         string lastName,
         string licenseNumber,

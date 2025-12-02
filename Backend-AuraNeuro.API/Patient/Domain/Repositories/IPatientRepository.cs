@@ -11,7 +11,7 @@ public interface IPatientRepository : IBaseRepository<Model.Aggregates.Patient>
     /// <summary>
     /// Finds a patient by the associated UserId (login identity).
     /// </summary>
-    Task<Model.Aggregates.Patient?> FindByUserIdAsync(Guid userId);
+    Task<Model.Aggregates.Patient?> FindByUserIdAsync(long userId);
 
     /// <summary>
     /// Finds a patient by email address.

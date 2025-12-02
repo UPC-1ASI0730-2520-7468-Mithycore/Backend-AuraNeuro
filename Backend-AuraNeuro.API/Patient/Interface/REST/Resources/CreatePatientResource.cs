@@ -4,7 +4,7 @@ namespace Backend_AuraNeuro.API.Patient.Interface.REST.Resources;
 /// Resource to register a patient.
 /// </summary>
 public record CreatePatientResource(
-    Guid UserId,
+    long UserId,
     string FirstName,
     string LastName,
     string Email,

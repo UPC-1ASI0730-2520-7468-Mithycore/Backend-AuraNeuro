@@ -4,7 +4,7 @@
 /// Command to register a neurologist's profile
 /// </summary>
 public record CreateNeurologistCommand(
-    Guid UserId,
+    long UserId,
     string FirstName,
     string LastName,
     string LicenseNumber,

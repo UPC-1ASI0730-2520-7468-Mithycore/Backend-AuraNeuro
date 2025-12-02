@@ -5,7 +5,7 @@ namespace Backend_AuraNeuro.API.Patient.Interface.REST.Resources;
 /// </summary>
 public record PatientResource(
     long Id,
-    Guid UserId,
+    long UserId,
     string FullName,
     string Email,
     string PhoneNumber,

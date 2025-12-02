@@ -55,7 +55,7 @@ namespace Backend_AuraNeuro.API.Patient.Infrastructure.Persistence.EFC.Repositor
 
         // ===== Custom methods from IPatientRepository =====
 
-        public async Task<PatientEntity?> FindByUserIdAsync(Guid userId)
+        public async Task<PatientEntity?> FindByUserIdAsync(long userId)
         {
             return await _patients.FirstOrDefaultAsync(p => p.UserId == userId);
         }

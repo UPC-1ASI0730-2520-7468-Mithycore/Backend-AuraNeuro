@@ -4,7 +4,7 @@ namespace Backend_AuraNeuro.API.Patient.Domain.Command;
 /// Command to register a new patient.
 /// </summary>
 public record CreatePatientCommand(
-    Guid UserId,
+    long UserId,
     string FirstName,
     string LastName,
     string Email,

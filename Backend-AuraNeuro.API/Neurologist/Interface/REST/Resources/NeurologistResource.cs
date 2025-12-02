@@ -5,7 +5,7 @@
 /// </summary>
 public record NeurologistResource(
     long Id,
-    Guid UserId,
+    long UserId,
     string FullName,
     string Email,
     string Phone,

@@ -16,6 +16,7 @@ using Backend_AuraNeuro.API.Appointments.Domain.Services.Queries;
 using Backend_AuraNeuro.API.Appointments.Application.Internal.CommandServices;
 using Backend_AuraNeuro.API.Appointments.Application.Internal.QueryServices;
 using Backend_AuraNeuro.API.Appointments.Infrastructure.Persistence.EFC.Repositories;
+using Backend_AuraNeuro.API.IAM.Infrastructure.Interfaces.ASP.Configuration.Extensions;
 using Backend_AuraNeuro.API.Shared.Domain.Repositories;
 using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC;        
 using Backend_AuraNeuro.API.Shared.Infrastructure.Persistence.EFC.Configuration;  
@@ -46,9 +47,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll", policy =>
     {
         policy
-            .AllowAnyOrigin()
+            .WithOrigins("http://localhost:5173")   
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
@@ -108,6 +110,8 @@ builder.Services.AddScoped<IPatientQueryService, PatientQueryService>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IAppointmentCommandService, AppointmentCommandService>();
 builder.Services.AddScoped<IAppointmentQueryService, AppointmentQueryService>();
+
+builder.AddIamContextServices();
 
 var app = builder.Build();
 

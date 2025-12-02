@@ -1,6 +1,7 @@
 using Backend_AuraNeuro.API.NeurologicalHealth.Domain.Model.Aggregates;
 using Backend_AuraNeuro.API.Appointments.Domain.Model.Aggregates;
 using Backend_AuraNeuro.API.Appointments.Infrastructure.Persistence.EFC.Configuration.Extensions;
+using Backend_AuraNeuro.API.IAM.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Humanizer;
 using Microsoft.EntityFrameworkCore;
@@ -88,6 +89,9 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         // ========= Patient Bounded Context (lo nuevo) =========
         modelBuilder.ApplyConfiguration(new PatientNeurologistConfiguration());
         modelBuilder.ApplyPatientsConfiguration();
+        
+        // IAM Context
+        modelBuilder.ApplyIamConfiguration();
         
     }
 }

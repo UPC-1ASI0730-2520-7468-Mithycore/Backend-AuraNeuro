@@ -8,7 +8,7 @@ namespace Backend_AuraNeuro.API.Neurologist.Domain.Repositories;
 /// </summary>
 public interface INeurologistRepository : IBaseRepository<NeurologistProfile>
 {
-    Task<NeurologistProfile?> FindByUserIdAsync(Guid userId);
+    Task<NeurologistProfile?> FindByUserIdAsync(long userId);
 
     Task<NeurologistProfile?> FindByLicenseNumberAsync(string licenseNumber);
 

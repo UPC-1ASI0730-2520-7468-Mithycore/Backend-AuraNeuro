@@ -4,7 +4,7 @@
 /// Resource to register a neurologist.
 /// </summary>
 public record CreateNeurologistResource(
-    Guid UserId,
+    long UserId,
     string FirstName,
     string LastName,
     string LicenseNumber,

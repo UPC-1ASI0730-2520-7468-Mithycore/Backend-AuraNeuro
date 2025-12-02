@@ -48,7 +48,7 @@ public class NeurologistRepository : INeurologistRepository
 
     // ===== Custom methods from INeurologistRepository =====
 
-    public async Task<NeurologistProfile?> FindByUserIdAsync(Guid userId)
+    public async Task<NeurologistProfile?> FindByUserIdAsync(long userId)
     {
         return await neurologists
             .FirstOrDefaultAsync(n => n.UserId == userId);

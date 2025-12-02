@@ -10,7 +10,7 @@ public partial class Patient
 {
     public long Id { get; private set; }
     
-    public Guid UserId { get; private set; }
+    public long UserId { get; private set; }
     public PersonName Name { get; private set; }
     public EmailAddress Email { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
@@ -33,7 +33,7 @@ public partial class Patient
     /// Main constructor with complete data.
     /// </summary>
     public Patient(
-        Guid userId,
+        long userId,
         string firstName,
         string lastName,
         string email,
